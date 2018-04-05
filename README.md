@@ -6,19 +6,19 @@
 	* Unity
 
 ##Art Tools
-###Photoshop
-###Blender
-###Krita
+	* Photoshop
+	* Blender
+	* Krita
 
 ##target Platforms
-###Windows
-###Linux
-###Mac OS
-###Mobile (after release)
+	* Windows
+	* Linux
+	* Mac OS
+	* Mobile (after release)
 
 ##Stores
-###Steam
-###windows Store
-###Origin
-###Apple Appstore
-###Facebook Gameroom
+	* Steam
+	* windows Store
+	* Origin
+	* Apple Appstore
+	* Facebook Gameroom
