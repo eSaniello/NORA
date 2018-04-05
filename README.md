@@ -3,7 +3,7 @@
 **Nora** is a 2D OpenWorld game (metroidvania style)
 
 ##Game Engine
-	*Unity
+	* Unity
 
 ##Art Tools
 ###Photoshop
