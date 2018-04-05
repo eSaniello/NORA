@@ -1,6 +1,6 @@
 #NORA
 
-**Nora** *is a 2D OpenWorld game (metroidvania style)
+**Nora** is a 2D OpenWorld game (metroidvania style)
 
 ##Game Engine
 ###Unity
