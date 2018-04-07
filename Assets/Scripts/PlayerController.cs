@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerController : MonoBehaviour {
@@ -26,7 +27,7 @@ public class PlayerController : MonoBehaviour {
 
         rb.velocity = new Vector2(Mathf.SmoothDamp(rb.velocity.x , targetVelX , ref velXSmoothing , (isGrounded) ? accelerationTimeGrounded : accelerationTimeAirbourne) , rb.velocity.y);
 
-        if (Input.GetKey(KeyCode.Space) && isGrounded)
+        if (Input.GetButtonDown("Jump") && isGrounded)
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce * Time.deltaTime);
         }
