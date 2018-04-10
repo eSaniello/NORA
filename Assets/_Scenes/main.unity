@@ -386,6 +386,7 @@ Transform:
   m_LocalScale: {x: 0.45, y: -0.05, z: 1}
   m_Children:
   - {fileID: 1838848606}
+  - {fileID: 557357482}
   m_Father: {fileID: 1455038763}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1505,6 +1506,34 @@ TilemapCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 1
   m_Offset: {x: 0, y: 0}
+--- !u!1 &557357481
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 557357482}
+  m_Layer: 0
+  m_Name: Shooting Direction
+  m_TagString: Untagged
+  m_Icon: {fileID: 8220585740371884164, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &557357482
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 557357481}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 432636490}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &630502459
 GameObject:
   m_ObjectHideFlags: 0
@@ -1721,9 +1750,13 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 256
+  accelerationTimeAirbourne: 0.2
+  accelerationTimeGrounded: 0.005
   bullet: {fileID: 1887116034959696, guid: 5659466fc07514942a706a9b20a3ef41, type: 2}
   gunTip: {fileID: 1838848606}
   bulletSpeed: 100
+  shootingDirection: {fileID: 557357482}
+  gun: {fileID: 432636490}
 --- !u!61 &1455038765
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1903,10 +1936,10 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.1
-  far clip plane: 5000
+  far clip plane: 1000
   field of view: 40
   orthographic: 1
-  orthographic size: 10
+  orthographic size: 5.5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1929,7 +1962,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1774626267}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.51568, y: -1.1097068, z: -0.30152473}
+  m_LocalPosition: {x: -11.841871, y: -1.1097114, z: -10.301525}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1761771889}
@@ -2074,9 +2107,13 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 256
+  accelerationTimeAirbourne: 0.2
+  accelerationTimeGrounded: 0.1
   bullet: {fileID: 1887116034959696, guid: 5659466fc07514942a706a9b20a3ef41, type: 2}
   gunTip: {fileID: 1477229576}
   bulletSpeed: 100
+  shootingDirection: {fileID: 0}
+  gun: {fileID: 0}
 --- !u!4 &1924550917
 Transform:
   m_ObjectHideFlags: 0
