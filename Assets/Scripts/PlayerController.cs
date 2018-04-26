@@ -58,15 +58,6 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKey(KeyCode.RightArrow) && Input.GetKey(KeyCode.UpArrow))
-            gun.localRotation = Quaternion.Euler(0, 0, 45f);
-        else if (Input.GetKey(KeyCode.RightArrow))
-            gun.localRotation = Quaternion.Euler(0, 0, 0);
-        if (Input.GetKey(KeyCode.LeftArrow) && Input.GetKey(KeyCode.UpArrow))
-            gun.localRotation = Quaternion.Euler(0, 0, -45f);
-        if (Input.GetKey(KeyCode.LeftArrow))
-            gun.localRotation = Quaternion.Euler(0, 0, 0);
-
         if (Input.GetKey(KeyCode.X))
         {
             GameObject projectile = Instantiate(bullet, gunTip.position, Quaternion.identity);
