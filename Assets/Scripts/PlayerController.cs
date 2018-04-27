@@ -21,6 +21,9 @@ public class PlayerController : MonoBehaviour
     bool facingRight = true;
     public Transform shootingDirection;
     public Transform gun;
+    Vector3 dir;
+    public float fireRate = 0;
+    float timeToFire = 0;
 
     void Start()
     {
@@ -35,6 +38,11 @@ public class PlayerController : MonoBehaviour
         float targetVelX = Input.GetAxisRaw("Horizontal") * moveSpeed * Time.deltaTime;
 
         rb.velocity = new Vector2(Mathf.SmoothDamp(rb.velocity.x, targetVelX, ref velXSmoothing, (isGrounded) ? accelerationTimeGrounded : accelerationTimeAirbourne), rb.velocity.y);
+
+        if(Input.GetKey(KeyCode.V) && isGrounded)
+        {
+            rb.velocity = Vector2.zero;
+        }
 
         if (Input.GetKeyDown(KeyCode.C) && isGrounded)
         {
@@ -58,11 +66,48 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKey(KeyCode.X))
+        //gun pointing functionality
+        if(Input.GetKey(KeyCode.RightArrow) && Input.GetKey(KeyCode.UpArrow) && facingRight)
         {
-            GameObject projectile = Instantiate(bullet, gunTip.position, Quaternion.identity);
+            Debug.Log("right");
+            gun.localRotation = Quaternion.Euler(0, 0, 45f);
+        }
+        else if (Input.GetKey(KeyCode.LeftArrow) && Input.GetKey(KeyCode.UpArrow) && !facingRight)
+        {
+            Debug.Log("left");
+            gun.localRotation = Quaternion.Euler(0, 0, 45f);
+        }
+        else if(Input.GetKey(KeyCode.UpArrow))
+        {
+            gun.localRotation = Quaternion.Euler(0, 0, 90f);
+        }
+        else if (Input.GetKey(KeyCode.DownArrow))
+        {
+            gun.localRotation = Quaternion.Euler(0, 0, -90f);
+        }
+        else
+        {
+            gun.localRotation = Quaternion.Euler(0, 0, 0);
         }
 
+        //shooting
+        if(fireRate == 0)
+        {
+            if (Input.GetKeyDown(KeyCode.X))
+            {
+                Shoot();
+            }
+        }
+        else
+        {
+            if(Input.GetKey(KeyCode.X) && Time.time > timeToFire)
+            {
+                timeToFire = Time.time + 1 / fireRate;
+                Shoot();
+            }
+        }
+
+        //flipping the character
         if (rb.velocity.x > 0 && !facingRight)
         {
             Flip();
@@ -80,5 +125,12 @@ public class PlayerController : MonoBehaviour
         Vector3 theScale = transform.localScale;
         theScale.x *= -1;
         transform.localScale = theScale;
+    }
+
+    void Shoot()
+    {
+        dir = shootingDirection.position - gun.transform.position;
+        GameObject projectile = Instantiate(bullet, gunTip.position, Quaternion.identity);
+        projectile.GetComponent<Rigidbody2D>().velocity = dir * bulletSpeed * Time.deltaTime;
     }
 }

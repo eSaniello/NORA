@@ -1763,9 +1763,10 @@ MonoBehaviour:
   accelerationTimeGrounded: 0.005
   bullet: {fileID: 1887116034959696, guid: 5659466fc07514942a706a9b20a3ef41, type: 2}
   gunTip: {fileID: 1838848606}
-  bulletSpeed: 100
+  bulletSpeed: 500
   shootingDirection: {fileID: 557357482}
   gun: {fileID: 432636490}
+  fireRate: 10
 --- !u!61 &1455038765
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2062,7 +2063,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1838848605}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.49, y: 0, z: 0}
+  m_LocalPosition: {x: 0.498, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 432636490}
@@ -2153,9 +2154,10 @@ MonoBehaviour:
   accelerationTimeGrounded: 0.005
   bullet: {fileID: 1887116034959696, guid: 5659466fc07514942a706a9b20a3ef41, type: 2}
   gunTip: {fileID: 1477229576}
-  bulletSpeed: 100
+  bulletSpeed: 500
   shootingDirection: {fileID: 1636002895}
   gun: {fileID: 420106333}
+  fireRate: 10
 --- !u!4 &1924550917
 Transform:
   m_ObjectHideFlags: 0
