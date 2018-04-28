@@ -269,11 +269,11 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -26.679028, y: 7.9892397}
+    - - {x: -26.87161, y: 9.818781}
       - {x: -26.800709, y: 2.6906362}
-      - {x: -27.107147, y: -5.9101834}
-      - {x: 45.188126, y: -6.4343133}
-      - {x: 45.130295, y: 8.480854}
+      - {x: -27.010859, y: -8.991516}
+      - {x: 45.188126, y: -7.9749794}
+      - {x: 45.130295, y: 10.791854}
 --- !u!4 &285110401
 Transform:
   m_ObjectHideFlags: 0
@@ -1541,6 +1541,48 @@ Transform:
   m_Father: {fileID: 432636490}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &584704770
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 584704772}
+  - component: {fileID: 584704771}
+  m_Layer: 0
+  m_Name: Bullet object pool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &584704771
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 584704770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba9b674404de2344585d52f59d8576b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bullet: {fileID: 1887116034959696, guid: 5659466fc07514942a706a9b20a3ef41, type: 2}
+  objectPoolCount: 30
+--- !u!4 &584704772
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 584704770}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &630502459
 GameObject:
   m_ObjectHideFlags: 0
@@ -1767,6 +1809,7 @@ MonoBehaviour:
   shootingDirection: {fileID: 557357482}
   gun: {fileID: 432636490}
   fireRate: 10
+  bulletPool: {fileID: 584704771}
 --- !u!61 &1455038765
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2158,6 +2201,7 @@ MonoBehaviour:
   shootingDirection: {fileID: 1636002895}
   gun: {fileID: 420106333}
   fireRate: 10
+  bulletPool: {fileID: 584704771}
 --- !u!4 &1924550917
 Transform:
   m_ObjectHideFlags: 0
