@@ -147,7 +147,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 264403838}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 102, y: 4, z: 0}
+  m_LocalPosition: {x: -41, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2039845362}
@@ -165,7 +165,7 @@ GameObject:
   - component: {fileID: 996462499}
   - component: {fileID: 996462498}
   m_Layer: 0
-  m_Name: Scene Trigger
+  m_Name: 'Scene Trigger '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -183,10 +183,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScenesToLoad:
-  - {fileID: 102900000, guid: 5c27f06c004f51b42b12e0b7349660c4, type: 3}
-  - {fileID: 102900000, guid: f9e1aa8ab38d9ea4894ebf500afb5b1d, type: 3}
-  ScenesToUnload:
+  - {fileID: 102900000, guid: 2e45046a7196e724e85a7a54f511f8d0, type: 3}
   - {fileID: 102900000, guid: ef0036215aa46374888098f8b1d365a0, type: 3}
+  ScenesToUnload:
+  - {fileID: 102900000, guid: 5c27f06c004f51b42b12e0b7349660c4, type: 3}
 --- !u!61 &996462499
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -219,7 +219,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 996462497}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 99.11, y: 2.41, z: 0}
+  m_LocalPosition: {x: -43.8, y: 1.41, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -239,7 +239,7 @@ GameObject:
   - component: {fileID: 2039845366}
   - component: {fileID: 2039845365}
   m_Layer: 8
-  m_Name: Tilemap1
+  m_Name: Tilemap4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -807,8 +807,8 @@ Tilemap:
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Origin: {x: -146, y: -4, z: 0}
-  m_Size: {x: 162, y: 9, z: 1}
+  m_Origin: {x: -22, y: -4, z: 0}
+  m_Size: {x: 38, y: 5, z: 1}
   m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
   m_TileOrientation: 0
   m_TileOrientationMatrix:
