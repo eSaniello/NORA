@@ -11,16 +11,16 @@ public class SceneHandler : MonoBehaviour
     private void Start()
     {
         instance = this;
-        LoadScene(SceneToLoad);
+        LoadScene(SceneToLoad.name);
     }
 
-    public void LoadScene(Object scene)
+    public void LoadScene(string scene)
     {
-        SceneManager.LoadSceneAsync(scene.name, LoadSceneMode.Additive);
+        SceneManager.LoadSceneAsync(scene, LoadSceneMode.Additive);
     }
 
-    public void UnloadScene(Object scene)
+    public void UnloadScene(string scene)
     {
-        SceneManager.UnloadSceneAsync(scene.name);
+        SceneManager.UnloadSceneAsync(scene);
     }
 }

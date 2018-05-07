@@ -7,12 +7,19 @@ public class SceneTrigger : MonoBehaviour
 {
     public Object[] ScenesToLoad;
     public Object[] ScenesToUnload;
+    
+    List<string> activeScenes = null;
 
-    Scene[] activeScenes = null;
+
+    private void Start()
+    {
+        activeScenes = new List<string>(SceneManager.sceneCount);
+    }
+
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag == "PlayerOne")
+        if(collision.tag == "Player")
         {
             StartCoroutine(DoLoadingStuff());
         }
@@ -20,32 +27,35 @@ public class SceneTrigger : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.tag == "playerOne")
+        if (collision.tag == "Player")
         {
-            activeScenes = new Scene[SceneManager.sceneCount];
-
             for (int t = 0; t < SceneManager.sceneCount; t++)
             {
-                activeScenes[t] = SceneManager.GetSceneAt(t);
+                activeScenes.Add(SceneManager.GetSceneAt(t).name);
+                Debug.Log(activeScenes[t]);
             }
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if(collision.tag == "PlayerOne")
+        if(collision.tag == "Player")
         {
             StartCoroutine(DoUnloadingStuff());
             Destroy(gameObject);
         }
     }
-    
+
 
     IEnumerator DoLoadingStuff()
     {
         for (int i = 0; i < ScenesToLoad.Length; i++)
         {
-            SceneHandler.instance.LoadScene(ScenesToLoad[i]);
+            Debug.Log(ScenesToLoad[i]);
+            if (SceneManager.GetSceneByName(ScenesToLoad[i].name).isLoaded)
+                break;
+            else
+                SceneHandler.instance.LoadScene(ScenesToLoad[i].name);
         }
 
         yield return new WaitForEndOfFrame();
@@ -55,11 +65,12 @@ public class SceneTrigger : MonoBehaviour
     {
         for (int i = 0; i < ScenesToUnload.Length; i++)
         {
-                if (SceneManager.Equals(ScenesToUnload[i], activeScenes[i]))
-                    SceneHandler.instance.UnloadScene(ScenesToUnload[i]);
-                else
-                    break;
-            
+            if (activeScenes.Contains(ScenesToUnload[i].name) && SceneManager.GetSceneByName(ScenesToUnload[i].name).isLoaded)
+            {
+                SceneHandler.instance.UnloadScene(ScenesToUnload[i].name);
+            }
+            else
+                break;
         }
 
         yield return new WaitForEndOfFrame();
