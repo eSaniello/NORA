@@ -10,7 +10,7 @@
 	* Blender
 	* Krita
 
-##target Platforms
+##Target Platforms
 	* Windows
 	* Linux
 	* Mac OS
