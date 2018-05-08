@@ -21,7 +21,7 @@ public class SceneTrigger : MonoBehaviour
     {
         if(collision.tag == "Player")
         {
-            StartCoroutine(DoLoadingStuff());
+            DoLoadingStuff();
         }
     }
 
@@ -29,11 +29,7 @@ public class SceneTrigger : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
-            for (int t = 0; t < SceneManager.sceneCount; t++)
-            {
-                activeScenes.Add(SceneManager.GetSceneAt(t).name);
-                Debug.Log(activeScenes[t]);
-            }
+            GetActiveScenesInHierarchy();
         }
     }
 
@@ -41,38 +37,34 @@ public class SceneTrigger : MonoBehaviour
     {
         if(collision.tag == "Player")
         {
-            StartCoroutine(DoUnloadingStuff());
-            Destroy(gameObject);
+            DoUnloadingStuff();
         }
     }
 
 
-    IEnumerator DoLoadingStuff()
+    void DoLoadingStuff()
     {
-        for (int i = 0; i < ScenesToLoad.Length; i++)
+        foreach(Object scene in ScenesToLoad)
         {
-            Debug.Log(ScenesToLoad[i]);
-            if (SceneManager.GetSceneByName(ScenesToLoad[i].name).isLoaded)
-                break;
-            else
-                SceneHandler.instance.LoadScene(ScenesToLoad[i].name);
+            if (!SceneManager.GetSceneByName(scene.name).isLoaded)
+                SceneHandler.instance.LoadScene(scene.name);
         }
-
-        yield return new WaitForEndOfFrame();
     }
 
-    IEnumerator DoUnloadingStuff()
+    void DoUnloadingStuff()
     {
-        for (int i = 0; i < ScenesToUnload.Length; i++)
+        foreach(Object scene in ScenesToUnload)
         {
-            if (activeScenes.Contains(ScenesToUnload[i].name) && SceneManager.GetSceneByName(ScenesToUnload[i].name).isLoaded)
-            {
-                SceneHandler.instance.UnloadScene(ScenesToUnload[i].name);
-            }
-            else
-                break;
+            if (activeScenes.Contains(scene.name) && SceneManager.GetSceneByName(scene.name).isLoaded)
+                SceneHandler.instance.UnloadScene(scene.name);
         }
+    }
 
-        yield return new WaitForEndOfFrame();
+    void GetActiveScenesInHierarchy()
+    {
+        for (int t = 0; t < SceneManager.sceneCount; t++)
+        {
+            activeScenes.Add(SceneManager.GetSceneAt(t).name);
+        }
     }
 }
