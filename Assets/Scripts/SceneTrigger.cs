@@ -15,7 +15,6 @@ public class SceneTrigger : MonoBehaviour
     List<string> activeScenes = null;
 
 
-
     private void Start()
     { 
         activeScenes = new List<string>(SceneManager.sceneCount);
