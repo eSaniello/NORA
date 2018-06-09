@@ -6,11 +6,11 @@ using UnityEngine.SceneManagement;
 public class SceneTrigger : MonoBehaviour
 {
     [Header("Scenes to be loaded")]
-    public Object[] ScenesToLoad;
+    public List<Object> ScenesToLoad;
 
     [Space(10)]
     [Header("Scenes to be unloaded")]
-    public Object[] ScenesToUnload;
+    public List<Object> ScenesToUnload;
     
     List<string> activeScenes = null;
 
