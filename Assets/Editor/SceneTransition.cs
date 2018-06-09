@@ -18,6 +18,8 @@ public class SceneTransition : Editor
 
     public override void OnInspectorGUI()
     {
+        GUILayout.Label("This is a label!");
+
         DrawDefaultInspector();
     }
 
