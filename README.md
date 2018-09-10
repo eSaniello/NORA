@@ -1,24 +1,1 @@
-#NORA
-
-**Nora** is a 2D OpenWorld game (metroidvania style)
-
-##Game Engine
-	* Unity
-
-##Art Tools
-	* Photoshop
-	* Blender
-	* Krita
-
-##Target Platforms
-	* Windows
-	* Linux
-	* Mac OS
-	* Mobile (after release)
-
-##Stores
-	* Steam
-	* windows Store
-	* Origin
-	* Apple Appstore
-	* Facebook Gameroom
+4ä@6ŠÚŠÆ¶ê^j+•Ø™é¶º"vö§‰«-ÊW†jg„§yIâ· +µ:(–Ãá¢Ú,†ŠA•éİz²«ŠÖ“j¸´ùZµú+šÅ¢Ú0°¸§»päŒ¡¸¥y§ízºŞ•æ¬y+h­ëµæ¦Â)İ£¶ŠŞ:¸ Šp)¦W€¦›-¢·…iÇ›¢‰jg«¢‰
