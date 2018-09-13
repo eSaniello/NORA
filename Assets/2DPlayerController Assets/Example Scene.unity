@@ -123,7 +123,7 @@ GameObject:
   - component: {fileID: 33057396}
   - component: {fileID: 33057398}
   - component: {fileID: 33057397}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Collision
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -223,7 +223,7 @@ GameObject:
   m_Component:
   - component: {fileID: 47938859}
   - component: {fileID: 47938860}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ground_big
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -392,7 +392,7 @@ GameObject:
   - component: {fileID: 126724617}
   - component: {fileID: 126724619}
   - component: {fileID: 126724618}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: LeftWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -492,7 +492,7 @@ GameObject:
   m_Component:
   - component: {fileID: 442190974}
   - component: {fileID: 442190973}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ground_big
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -568,7 +568,7 @@ GameObject:
   - component: {fileID: 647084188}
   - component: {fileID: 647084190}
   - component: {fileID: 647084189}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: MiddleUpperWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -669,7 +669,7 @@ GameObject:
   - component: {fileID: 1096835216}
   - component: {fileID: 1096835215}
   - component: {fileID: 1096835214}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: TopWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -769,7 +769,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1195512860}
   - component: {fileID: 1195512861}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ground_big
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -846,7 +846,6 @@ GameObject:
   - component: {fileID: 1210276430}
   - component: {fileID: 1210276429}
   - component: {fileID: 1210276432}
-  - component: {fileID: 1210276433}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -958,23 +957,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.32, y: 0.32}
   m_EdgeRadius: 0
---- !u!114 &1210276433
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1210276428}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26b93807745cdf345add280e92af3077, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxSpeed: 10
-  acceleration: 35
-  jumpSpeed: 8
-  jumpDuration: 150
-  enableDoubleJump: 1
-  wallHitDoubbleJumpOverride: 1
 --- !u!1 &1395163762
 GameObject:
   m_ObjectHideFlags: 0
@@ -985,7 +967,7 @@ GameObject:
   - component: {fileID: 1395163763}
   - component: {fileID: 1395163764}
   - component: {fileID: 1395163765}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: MiddleGround
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1086,7 +1068,7 @@ GameObject:
   - component: {fileID: 1440459718}
   - component: {fileID: 1440459720}
   - component: {fileID: 1440459719}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RightWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1187,8 +1169,7 @@ GameObject:
   - component: {fileID: 1613656509}
   - component: {fileID: 1613656511}
   - component: {fileID: 1613656510}
-  - component: {fileID: 1613656512}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: MiddleLowerWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1279,17 +1260,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1613656512
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1613656508}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d601dc592a3883e4d8aa93e9aa509053, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1616708679
 GameObject:
   m_ObjectHideFlags: 0
@@ -1300,7 +1270,7 @@ GameObject:
   - component: {fileID: 1616708680}
   - component: {fileID: 1616708682}
   - component: {fileID: 1616708681}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: TopGround
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1400,7 +1370,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1627283263}
   - component: {fileID: 1627283264}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ground_big
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1474,7 +1444,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1708369581}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: GroundHolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
