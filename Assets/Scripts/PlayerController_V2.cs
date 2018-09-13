@@ -150,7 +150,7 @@ public class PlayerController_V2 : MonoBehaviour
 
     private bool isOnWallLeft()
     {
-        bool retVal;
+        bool retVal = false;
 
         float lenghtToSearch = 0.1f;
         float colliderThreshold = 0.01f;
@@ -176,7 +176,7 @@ public class PlayerController_V2 : MonoBehaviour
 
     private bool isOnWallRight()
     {
-        bool retVal;
+        bool retVal = false;
 
         float lenghtToSearch = 0.1f;
         float colliderThreshold = 0.01f;
