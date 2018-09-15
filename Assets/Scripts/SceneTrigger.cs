@@ -25,16 +25,17 @@ public class SceneTrigger : MonoBehaviour
         if(collision.tag == "Player")
         {
             DoLoadingStuff();
-        }
-    }
-
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if (collision.tag == "Player")
-        {
             GetActiveScenesInHierarchy();
         }
     }
+
+    //private void OnTriggerStay2D(Collider2D collision)
+    //{
+    //    if (collision.tag == "Player")
+    //    {
+    //        GetActiveScenesInHierarchy();
+    //    }
+    //}
 
     private void OnTriggerExit2D(Collider2D collision)
     {
@@ -45,7 +46,7 @@ public class SceneTrigger : MonoBehaviour
     }
 
 
-    void DoLoadingStuff()
+    public void DoLoadingStuff()
     {
         foreach(Object scene in ScenesToLoad)
         {
@@ -54,7 +55,7 @@ public class SceneTrigger : MonoBehaviour
         }
     }
 
-    void DoUnloadingStuff()
+    public void DoUnloadingStuff()
     {
         foreach(Object scene in ScenesToUnload)
         {
@@ -63,7 +64,7 @@ public class SceneTrigger : MonoBehaviour
         }
     }
 
-    void GetActiveScenesInHierarchy()
+    public void GetActiveScenesInHierarchy()
     {
         for (int t = 0; t < SceneManager.sceneCount; t++)
         {

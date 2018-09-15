@@ -116,9 +116,9 @@ NavMeshSettings:
 --- !u!1 &33863275
 GameObject:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
+  serializedVersion: 6
   m_Component:
   - component: {fileID: 33863277}
   - component: {fileID: 33863276}
@@ -132,7 +132,7 @@ GameObject:
 --- !u!156049354 &33863276
 Grid:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 33863275}
   m_Enabled: 1
@@ -143,7 +143,7 @@ Grid:
 --- !u!4 &33863277
 Transform:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 33863275}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
@@ -157,14 +157,14 @@ Transform:
 --- !u!1 &110736950
 GameObject:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
+  serializedVersion: 6
   m_Component:
   - component: {fileID: 110736953}
   - component: {fileID: 110736952}
   - component: {fileID: 110736951}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Scene Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -174,7 +174,7 @@ GameObject:
 --- !u!114 &110736951
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 110736950}
   m_Enabled: 1
@@ -191,7 +191,7 @@ MonoBehaviour:
 --- !u!61 &110736952
 BoxCollider2D:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 110736950}
   m_Enabled: 1
@@ -216,7 +216,7 @@ BoxCollider2D:
 --- !u!4 &110736953
 Transform:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 110736950}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
@@ -229,9 +229,9 @@ Transform:
 --- !u!1 &381973131
 GameObject:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
+  serializedVersion: 6
   m_Component:
   - component: {fileID: 381973132}
   m_Layer: 0
@@ -244,7 +244,7 @@ GameObject:
 --- !u!4 &381973132
 Transform:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 381973131}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -259,9 +259,9 @@ Transform:
 --- !u!1 &554908233
 GameObject:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
+  serializedVersion: 6
   m_Component:
   - component: {fileID: 554908234}
   - component: {fileID: 554908236}
@@ -279,7 +279,7 @@ GameObject:
 --- !u!4 &554908234
 Transform:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 554908233}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
@@ -292,7 +292,7 @@ Transform:
 --- !u!483693784 &554908235
 TilemapRenderer:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 554908233}
   m_Enabled: 1
@@ -334,7 +334,7 @@ TilemapRenderer:
 --- !u!1839735485 &554908236
 Tilemap:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 554908233}
   m_Enabled: 1
@@ -1123,7 +1123,7 @@ Tilemap:
 --- !u!66 &554908237
 CompositeCollider2D:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 554908233}
   m_Enabled: 1
@@ -1260,7 +1260,7 @@ CompositeCollider2D:
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 554908233}
   m_BodyType: 2
@@ -1279,7 +1279,7 @@ Rigidbody2D:
 --- !u!19719996 &554908239
 TilemapCollider2D:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 554908233}
   m_Enabled: 1
