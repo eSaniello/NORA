@@ -3,25 +3,30 @@ using System.Collections;
 using Prime31;
 
 
-public class DemoScene : MonoBehaviour
+public class PlayerController2D : MonoBehaviour
 {
 	// movement config
-	public float gravity = -25f;
 	public float runSpeed = 8f;
 	public float groundDamping = 20f; // how fast do we change direction? higher means faster
 	public float inAirDamping = 5f;
-	public float jumpHeight = 3f;
+	public float maxJumpHeight = 4f;
+    public float minJumpHeight = 2f;
+    public float timeToJumpApex = .4f;
 
-	[HideInInspector]
+    [HideInInspector]
 	private float normalizedHorizontalSpeed = 0;
 
 	private CharacterController2D _controller;
 	private Animator _animator;
 	private RaycastHit2D _lastControllerColliderHit;
 	private Vector3 _velocity;
+    private float maxJumpVelocity;
+    private float minJumpVelocity;
+    private float gravity;
+    private bool canDoubleJump = false;
 
 
-	void Awake()
+    void Awake()
 	{
 		_animator = GetComponent<Animator>();
 		_controller = GetComponent<CharacterController2D>();
@@ -32,10 +37,17 @@ public class DemoScene : MonoBehaviour
 		_controller.onTriggerExitEvent += onTriggerExitEvent;
 	}
 
+    private void Start()
+    {
+        gravity = -(2 * maxJumpHeight) / Mathf.Pow(timeToJumpApex, 2);
+        maxJumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
+        minJumpVelocity = Mathf.Sqrt(2 * Mathf.Abs(gravity) * minJumpHeight);
+    }
 
-	#region Event Listeners
 
-	void onControllerCollider( RaycastHit2D hit )
+    #region Event Listeners
+
+    void onControllerCollider( RaycastHit2D hit )
 	{
 		// bail out on plain old ground hits cause they arent very interesting
 		if( hit.normal.y == 1f )
@@ -94,15 +106,34 @@ public class DemoScene : MonoBehaviour
 
 
 		// we can only jump whilst grounded
-		if( _controller.isGrounded && Input.GetKeyDown( KeyCode.Space ) )
+		if(Input.GetKeyDown( KeyCode.Space ) )
 		{
-			_velocity.y = Mathf.Sqrt( 2f * jumpHeight * -gravity );
-			_animator.Play( Animator.StringToHash( "Jump" ) );
+            if (_controller.isGrounded)
+            {
+                _velocity.y = maxJumpVelocity;
+                _animator.Play( Animator.StringToHash( "Jump" ) );
+                canDoubleJump = true;
+            }
+            else
+            {
+                if (canDoubleJump)
+                {
+                    canDoubleJump = false;
+                    _velocity.y = maxJumpVelocity;
+                    _animator.Play(Animator.StringToHash("Jump"));
+                }
+            }
 		}
 
+        if (Input.GetKeyUp(KeyCode.Space))
+        {
+            if (_velocity.y > minJumpVelocity)
+                _velocity.y = minJumpVelocity;
+        }
 
-		// apply horizontal speed smoothing it. dont really do this with Lerp. Use SmoothDamp or something that provides more control
-		var smoothedMovementFactor = _controller.isGrounded ? groundDamping : inAirDamping; // how fast do we change direction?
+
+        // apply horizontal speed smoothing it. dont really do this with Lerp. Use SmoothDamp or something that provides more control
+        var smoothedMovementFactor = _controller.isGrounded ? groundDamping : inAirDamping; // how fast do we change direction?
 		_velocity.x = Mathf.Lerp( _velocity.x, normalizedHorizontalSpeed * runSpeed, Time.deltaTime * smoothedMovementFactor );
 
 		// apply gravity before moving

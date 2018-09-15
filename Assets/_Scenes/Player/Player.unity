@@ -427,11 +427,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa2adba8eae290d47b173bed3e182f0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gravity: -25
   runSpeed: 12
   groundDamping: 20
   inAirDamping: 5
-  jumpHeight: 3
+  maxJumpHeight: 4
+  minJumpHeight: 2
+  timeToJumpApex: 0.45
 --- !u!95 &1455038766
 Animator:
   serializedVersion: 3
