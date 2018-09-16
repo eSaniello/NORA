@@ -427,12 +427,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa2adba8eae290d47b173bed3e182f0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canDoubleJump: 1
+  canWallJump: 1
   runSpeed: 12
   groundDamping: 20
   inAirDamping: 5
   maxJumpHeight: 4
   minJumpHeight: 2
   timeToJumpApex: 0.45
+  wallSlidingSpeed: 0.75
+  wallCrawl: {x: 12, y: 15}
+  wallJump: {x: 18, y: 17}
 --- !u!95 &1455038766
 Animator:
   serializedVersion: 3
@@ -442,7 +447,7 @@ Animator:
   m_GameObject: {fileID: 1455038761}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 166e4d16c14bde345ba8583168ea12c9, type: 2}
+  m_Controller: {fileID: 0}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

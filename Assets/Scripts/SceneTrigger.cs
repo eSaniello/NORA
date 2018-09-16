@@ -29,13 +29,13 @@ public class SceneTrigger : MonoBehaviour
         }
     }
 
-    //private void OnTriggerStay2D(Collider2D collision)
-    //{
-    //    if (collision.tag == "Player")
-    //    {
-    //        GetActiveScenesInHierarchy();
-    //    }
-    //}
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.tag == "Player")
+        {
+            GetActiveScenesInHierarchy();
+        }
+    }
 
     private void OnTriggerExit2D(Collider2D collision)
     {

@@ -5,13 +5,19 @@ using Prime31;
 
 public class PlayerController2D : MonoBehaviour
 {
-	// movement config
+    // movement config
+    public bool canDoubleJump;
+    public bool canWallJump;
 	public float runSpeed = 8f;
 	public float groundDamping = 20f; // how fast do we change direction? higher means faster
 	public float inAirDamping = 5f;
 	public float maxJumpHeight = 4f;
     public float minJumpHeight = 2f;
     public float timeToJumpApex = .4f;
+    public float wallSlidingSpeed;
+    public Vector2 wallCrawl;
+    public Vector2 wallJump;
+
 
     [HideInInspector]
 	private float normalizedHorizontalSpeed = 0;
@@ -23,7 +29,10 @@ public class PlayerController2D : MonoBehaviour
     private float maxJumpVelocity;
     private float minJumpVelocity;
     private float gravity;
-    private bool canDoubleJump = false;
+    private bool doubleJump = false;
+    private bool isWallSliding = false;
+    private bool facingRight = true;
+    private int input;
 
 
     void Awake()
@@ -75,23 +84,28 @@ public class PlayerController2D : MonoBehaviour
 	// the Update loop contains a very simple example of moving the character around and controlling the animation
 	void Update()
 	{
+        input = (int)Input.GetAxisRaw("Horizontal");
+        int wallDirX = (_controller.collisionState.left) ? -1 : 1;
+
 		if( _controller.isGrounded )
 			_velocity.y = 0;
 
-		if( Input.GetKey( KeyCode.RightArrow ) )
+		if( input > 0 ) 
 		{
 			normalizedHorizontalSpeed = 1;
-			if( transform.localScale.x < 0f )
-				transform.localScale = new Vector3( -transform.localScale.x, transform.localScale.y, transform.localScale.z );
+
+            if (!facingRight)
+                Flip();
 
 			if( _controller.isGrounded )
 				_animator.Play( Animator.StringToHash( "Run" ) );
 		}
-		else if( Input.GetKey( KeyCode.LeftArrow ) )
+		else if( input < 0 )
 		{
 			normalizedHorizontalSpeed = -1;
-			if( transform.localScale.x > 0f )
-				transform.localScale = new Vector3( -transform.localScale.x, transform.localScale.y, transform.localScale.z );
+
+            if (facingRight)
+                Flip();
 
 			if( _controller.isGrounded )
 				_animator.Play( Animator.StringToHash( "Run" ) );
@@ -104,23 +118,51 @@ public class PlayerController2D : MonoBehaviour
 				_animator.Play( Animator.StringToHash( "Idle" ) );
 		}
 
+        // apply horizontal speed smoothing it. dont really do this with Lerp. Use SmoothDamp or something that provides more control
+        var smoothedMovementFactor = _controller.isGrounded ? groundDamping : inAirDamping; // how fast do we change direction?
+        _velocity.x = Mathf.Lerp(_velocity.x, normalizedHorizontalSpeed * runSpeed, Time.deltaTime * smoothedMovementFactor);
 
-		// we can only jump whilst grounded
-		if(Input.GetKeyDown( KeyCode.Space ) )
+        //wall sliding
+        if (!_controller.isGrounded && (_controller.collisionState.left || _controller.collisionState.right) && _velocity.y < 0 && (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow)))
+        {
+            isWallSliding = true;
+            _velocity.y *= wallSlidingSpeed;
+        }
+        else
+        {
+            isWallSliding = false;
+        }
+
+        // we can only jump whilst grounded
+        if (Input.GetKeyDown( KeyCode.Space ) )
 		{
             if (_controller.isGrounded)
             {
                 _velocity.y = maxJumpVelocity;
                 _animator.Play( Animator.StringToHash( "Jump" ) );
-                canDoubleJump = true;
+                doubleJump = true;
             }
             else
             {
-                if (canDoubleJump)
+                if (doubleJump && canDoubleJump)
                 {
-                    canDoubleJump = false;
+                    doubleJump = false;
                     _velocity.y = maxJumpVelocity;
                     _animator.Play(Animator.StringToHash("Jump"));
+                }
+            }
+
+            if (isWallSliding & canWallJump)
+            {
+                if (wallDirX == input)
+                {
+                    _velocity.x = -wallDirX * wallCrawl.x;
+                    _velocity.y = wallCrawl.y;
+                }
+                else
+                {
+                    _velocity.x = -wallDirX * wallJump.x;
+                    _velocity.y = wallJump.y;
                 }
             }
 		}
@@ -131,21 +173,16 @@ public class PlayerController2D : MonoBehaviour
                 _velocity.y = minJumpVelocity;
         }
 
+        // apply gravity before moving
+        _velocity.y += gravity * Time.deltaTime;
 
-        // apply horizontal speed smoothing it. dont really do this with Lerp. Use SmoothDamp or something that provides more control
-        var smoothedMovementFactor = _controller.isGrounded ? groundDamping : inAirDamping; // how fast do we change direction?
-		_velocity.x = Mathf.Lerp( _velocity.x, normalizedHorizontalSpeed * runSpeed, Time.deltaTime * smoothedMovementFactor );
-
-		// apply gravity before moving
-		_velocity.y += gravity * Time.deltaTime;
-
-		// if holding down bump up our movement amount and turn off one way platform detection for a frame.
-		// this lets us jump down through one way platforms
-		if( _controller.isGrounded && Input.GetKey( KeyCode.DownArrow ) )
-		{
-			_velocity.y *= 3f;
-			_controller.ignoreOneWayPlatformsThisFrame = true;
-		}
+        // if holding down bump up our movement amount and turn off one way platform detection for a frame.
+        // this lets us jump down through one way platforms
+        //if( _controller.isGrounded && Input.GetKey( KeyCode.DownArrow ) )
+        //{
+        //	_velocity.y *= 3f;
+        //	_controller.ignoreOneWayPlatformsThisFrame = true;
+        //}
 
 		_controller.move( _velocity * Time.deltaTime );
 
@@ -153,4 +190,11 @@ public class PlayerController2D : MonoBehaviour
 		_velocity = _controller.velocity;
 	}
 
+    void Flip()
+    {
+        facingRight = !facingRight;
+        Vector3 theScale = transform.localScale;
+        theScale.x *= -1;
+        transform.localScale = theScale;
+    }
 }
