@@ -15,6 +15,7 @@ public class PlayerController2D : MonoBehaviour
     public float minJumpHeight = 2f;
     public float timeToJumpApex = .4f;
     public float wallSlidingSpeed;
+    public float wallStickTime = .25f;
     public Vector2 wallCrawl;
     public Vector2 wallJump;
 
@@ -31,6 +32,7 @@ public class PlayerController2D : MonoBehaviour
     private float gravity;
     private bool doubleJump = false;
     private bool isWallSliding = false;
+    private float timeToWallUnstick;
     private bool facingRight = true;
     private int input;
 
@@ -118,21 +120,35 @@ public class PlayerController2D : MonoBehaviour
 				_animator.Play( Animator.StringToHash( "Idle" ) );
 		}
 
-        // apply horizontal speed smoothing it. dont really do this with Lerp. Use SmoothDamp or something that provides more control
-        var smoothedMovementFactor = _controller.isGrounded ? groundDamping : inAirDamping; // how fast do we change direction?
-        _velocity.x = Mathf.Lerp(_velocity.x, normalizedHorizontalSpeed * runSpeed, Time.deltaTime * smoothedMovementFactor);
-
         //wall sliding
-        if (!_controller.isGrounded && (_controller.collisionState.left || _controller.collisionState.right) && _velocity.y < 0 && (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow)))
+        if (!_controller.isGrounded && (_controller.collisionState.left || _controller.collisionState.right) && _velocity.y < 0 /*&& (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow))*/)
         {
             isWallSliding = true;
             _velocity.y *= wallSlidingSpeed;
+
+            if(timeToWallUnstick > 0)
+            {
+                _velocity.x = 0;
+
+                if(input != wallDirX && input != 0)
+                {
+                    timeToWallUnstick -= Time.deltaTime;
+                }
+                else
+                {
+                    timeToWallUnstick = wallStickTime;
+                }
+            }
+            else
+            {
+                timeToWallUnstick = wallStickTime;
+            }
         }
         else
         {
             isWallSliding = false;
         }
-
+        Debug.Log(isWallSliding);
         // we can only jump whilst grounded
         if (Input.GetKeyDown( KeyCode.Space ) )
 		{
@@ -172,6 +188,10 @@ public class PlayerController2D : MonoBehaviour
             if (_velocity.y > minJumpVelocity)
                 _velocity.y = minJumpVelocity;
         }
+
+        // apply horizontal speed smoothing it. dont really do this with Lerp. Use SmoothDamp or something that provides more control
+        var smoothedMovementFactor = _controller.isGrounded ? groundDamping : inAirDamping; // how fast do we change direction?
+        _velocity.x = Mathf.Lerp(_velocity.x, normalizedHorizontalSpeed * runSpeed, Time.deltaTime * smoothedMovementFactor);
 
         // apply gravity before moving
         _velocity.y += gravity * Time.deltaTime;

@@ -436,6 +436,7 @@ MonoBehaviour:
   minJumpHeight: 2
   timeToJumpApex: 0.45
   wallSlidingSpeed: 0.75
+  wallStickTime: 0.5
   wallCrawl: {x: 12, y: 15}
   wallJump: {x: 18, y: 17}
 --- !u!95 &1455038766
@@ -578,7 +579,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1536419391}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.05, y: 1.37, z: 0}
+  m_LocalPosition: {x: -6.05, y: 9.34, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1761771889}
@@ -726,7 +727,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1774626267}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.3056114, y: -1.1097114, z: -10.301525}
+  m_LocalPosition: {x: 2.3056114, y: -1.1097115, z: -10.301525}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1761771889}
@@ -838,7 +839,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2006621182}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.3056114, y: -1.1097114, z: -10.301525}
+  m_LocalPosition: {x: 2.3056114, y: -1.1097115, z: -10.301525}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2147019390}
