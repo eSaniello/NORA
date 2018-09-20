@@ -99,8 +99,8 @@ public class PlayerController2D : MonoBehaviour
             if (!facingRight)
                 Flip();
 
-			if( _controller.isGrounded )
-				_animator.Play( Animator.StringToHash( "Run" ) );
+			//if( _controller.isGrounded )
+			//	_animator.Play( Animator.StringToHash( "Run" ) );
 		}
 		else if( input < 0 )
 		{
@@ -109,19 +109,19 @@ public class PlayerController2D : MonoBehaviour
             if (facingRight)
                 Flip();
 
-			if( _controller.isGrounded )
-				_animator.Play( Animator.StringToHash( "Run" ) );
+			//if( _controller.isGrounded )
+			//	_animator.Play( Animator.StringToHash( "Run" ) );
 		}
 		else
 		{
 			normalizedHorizontalSpeed = 0;
 
-			if( _controller.isGrounded )
-				_animator.Play( Animator.StringToHash( "Idle" ) );
+			//if( _controller.isGrounded )
+			//	_animator.Play( Animator.StringToHash( "Idle" ) );
 		}
 
         //wall sliding
-        if (!_controller.isGrounded && (_controller.collisionState.left || _controller.collisionState.right) && _velocity.y < 0 /*&& (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow))*/)
+        if (!_controller.isGrounded && (_controller.collisionState.left || _controller.collisionState.right) && _velocity.y < 0)
         {
             isWallSliding = true;
             _velocity.y *= wallSlidingSpeed;
@@ -148,23 +148,26 @@ public class PlayerController2D : MonoBehaviour
         {
             isWallSliding = false;
         }
-        Debug.Log(isWallSliding);
+        Debug.Log("Is wall sliding: " + isWallSliding);
+        Debug.Log("faceDir: " + _controller.collisionState.faceDir);
+        Debug.Log("Collision state left: " + _controller.collisionState.left);
+        Debug.Log("Collision state right: " + _controller.collisionState.right);
         // we can only jump whilst grounded
         if (Input.GetKeyDown( KeyCode.Space ) )
 		{
             if (_controller.isGrounded)
             {
                 _velocity.y = maxJumpVelocity;
-                _animator.Play( Animator.StringToHash( "Jump" ) );
+               //_animator.Play( Animator.StringToHash( "Jump" ) );
                 doubleJump = true;
             }
             else
             {
-                if (doubleJump && canDoubleJump)
+                if (doubleJump && canDoubleJump && !(_controller.collisionState.left || _controller.collisionState.right))
                 {
                     doubleJump = false;
                     _velocity.y = maxJumpVelocity;
-                    _animator.Play(Animator.StringToHash("Jump"));
+                    //_animator.Play(Animator.StringToHash("Jump"));
                 }
             }
 
