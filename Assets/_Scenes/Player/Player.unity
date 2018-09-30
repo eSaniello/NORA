@@ -429,6 +429,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canDoubleJump: 1
   canWallJump: 1
+  canDash: 0
   runSpeed: 12
   groundDamping: 20
   inAirDamping: 5
@@ -439,6 +440,8 @@ MonoBehaviour:
   wallStickTime: 0.25
   wallCrawl: {x: 12, y: 15}
   wallJump: {x: 18, y: 17}
+  dashSpeed: 50
+  dashTime: 0
 --- !u!95 &1455038766
 Animator:
   serializedVersion: 3

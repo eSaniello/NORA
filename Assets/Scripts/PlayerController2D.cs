@@ -8,6 +8,7 @@ public class PlayerController2D : MonoBehaviour
     // movement config
     public bool canDoubleJump;
     public bool canWallJump;
+    public bool canDash;
 	public float runSpeed = 8f;
 	public float groundDamping = 20f; // how fast do we change direction? higher means faster
 	public float inAirDamping = 5f;
@@ -18,6 +19,8 @@ public class PlayerController2D : MonoBehaviour
     public float wallStickTime = .25f;
     public Vector2 wallCrawl;
     public Vector2 wallJump;
+    public float dashSpeed;
+    public float dashTime;
 
 
     [HideInInspector]
@@ -35,6 +38,8 @@ public class PlayerController2D : MonoBehaviour
     private float timeToWallUnstick;
     private bool facingRight = true;
     private int input;
+    private float dashTimer;
+    private bool dash;
 
 
     void Awake()
@@ -148,10 +153,13 @@ public class PlayerController2D : MonoBehaviour
         {
             isWallSliding = false;
         }
+
         Debug.Log("Is wall sliding: " + isWallSliding);
         Debug.Log("faceDir: " + _controller.collisionState.faceDir);
         Debug.Log("Collision state left: " + _controller.collisionState.left);
         Debug.Log("Collision state right: " + _controller.collisionState.right);
+        Debug.Log("X Velocity" + _velocity.x);
+
         // we can only jump whilst grounded
         if (Input.GetKeyDown( KeyCode.Space ) )
 		{
@@ -192,7 +200,23 @@ public class PlayerController2D : MonoBehaviour
                 _velocity.y = minJumpVelocity;
         }
 
-        // apply horizontal speed smoothing it. dont really do this with Lerp. Use SmoothDamp or something that provides more control
+        //dashing code
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            float dash;
+
+            if (facingRight)
+                dash = dashSpeed;
+            else
+                dash = -dashSpeed;
+
+            if (_controller.isGrounded)
+                _velocity.x += dash;
+            else
+                _velocity.x += (dash / 2);
+        }
+
+        //apply horizontal speed smoothing it.dont really do this with Lerp.Use SmoothDamp or something that provides more control
         var smoothedMovementFactor = _controller.isGrounded ? groundDamping : inAirDamping; // how fast do we change direction?
         _velocity.x = Mathf.Lerp(_velocity.x, normalizedHorizontalSpeed * runSpeed, Time.deltaTime * smoothedMovementFactor);
 
