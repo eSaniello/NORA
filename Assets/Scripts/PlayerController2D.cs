@@ -20,7 +20,6 @@ public class PlayerController2D : MonoBehaviour
     public Vector2 wallCrawl;
     public Vector2 wallJump;
     public float dashSpeed;
-    public float dashTime;
 
 
     [HideInInspector]
@@ -38,7 +37,7 @@ public class PlayerController2D : MonoBehaviour
     private float timeToWallUnstick;
     private bool facingRight = true;
     private int input;
-    private float dashTimer;
+    private bool isDashing;
     private bool dash;
 
 
@@ -201,20 +200,38 @@ public class PlayerController2D : MonoBehaviour
         }
 
         //dashing code
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+        if (Input.GetKeyDown(KeyCode.LeftShift) && canDash)
         {
-            float dash;
+            isDashing = true;
 
-            if (facingRight)
-                dash = dashSpeed;
-            else
-                dash = -dashSpeed;
+            if (dash)
+            {
+                float _dashSpeed;
 
-            if (_controller.isGrounded)
-                _velocity.x += dash;
-            else
-                _velocity.x += (dash / 2);
+                if (facingRight)
+                    _dashSpeed = dashSpeed;
+                else
+                    _dashSpeed = -dashSpeed;
+
+                if (_controller.isGrounded)
+                {
+                    _velocity.x += _dashSpeed;
+                    dash = false;
+                }
+                else
+                {
+                    _velocity.x += (_dashSpeed / 2.5f);
+                    dash = false;
+                }
+            }
         }
+
+        if ((_controller.isGrounded || isWallSliding) && isDashing)
+        {
+            dash = true;
+            isDashing = false;
+        }
+        
 
         //apply horizontal speed smoothing it.dont really do this with Lerp.Use SmoothDamp or something that provides more control
         var smoothedMovementFactor = _controller.isGrounded ? groundDamping : inAirDamping; // how fast do we change direction?
