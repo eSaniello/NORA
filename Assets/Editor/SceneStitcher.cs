@@ -97,7 +97,7 @@ public class SceneStitcher : Editor
 
 
         //debug purposes
-        //DrawDefaultInspector();
+        DrawDefaultInspector();
     }
 
     void DrawScenesToLoadList(int index)
