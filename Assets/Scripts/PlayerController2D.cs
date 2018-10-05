@@ -40,6 +40,9 @@ public class PlayerController2D : MonoBehaviour
     private bool isDashing;
     private bool dash;
 
+    [HideInInspector]
+    public bool isSwinging;
+
 
     void Awake()
 	{
