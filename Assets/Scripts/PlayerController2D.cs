@@ -26,7 +26,7 @@ public class PlayerController2D : MonoBehaviour
 	private float normalizedHorizontalSpeed = 0;
 
 	private CharacterController2D _controller;
-	private Animator _animator;
+	//private Animator _animator;
 	private RaycastHit2D _lastControllerColliderHit;
 	private Vector3 _velocity;
     private float maxJumpVelocity;
@@ -40,13 +40,10 @@ public class PlayerController2D : MonoBehaviour
     private bool isDashing;
     private bool dash;
 
-    [HideInInspector]
-    public bool isSwinging;
-
 
     void Awake()
 	{
-		_animator = GetComponent<Animator>();
+		//_animator = GetComponent<Animator>();
 		_controller = GetComponent<CharacterController2D>();
 
 		// listen to some events for illustration purposes
@@ -155,12 +152,7 @@ public class PlayerController2D : MonoBehaviour
         {
             isWallSliding = false;
         }
-
-        Debug.Log("Is wall sliding: " + isWallSliding);
-        Debug.Log("faceDir: " + _controller.collisionState.faceDir);
-        Debug.Log("Collision state left: " + _controller.collisionState.left);
-        Debug.Log("Collision state right: " + _controller.collisionState.right);
-        Debug.Log("X Velocity" + _velocity.x);
+        
 
         // we can only jump whilst grounded
         if (Input.GetKeyDown( KeyCode.Space ) )
