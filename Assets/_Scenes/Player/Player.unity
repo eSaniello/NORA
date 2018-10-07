@@ -218,48 +218,6 @@ Transform:
   m_Father: {fileID: 432636490}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &584704770
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 584704772}
-  - component: {fileID: 584704771}
-  m_Layer: 0
-  m_Name: Bullet object pool
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &584704771
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 584704770}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba9b674404de2344585d52f59d8576b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bullet: {fileID: 1887116034959696, guid: 5659466fc07514942a706a9b20a3ef41, type: 2}
-  objectPoolCount: 30
---- !u!4 &584704772
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 584704770}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1536419392}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &630502459
 GameObject:
   m_ObjectHideFlags: 0
@@ -345,6 +303,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1455038763}
   - component: {fileID: 1455038766}
+  - component: {fileID: 1455038768}
   - component: {fileID: 1455038765}
   - component: {fileID: 1455038767}
   - component: {fileID: 1455038764}
@@ -441,7 +400,6 @@ MonoBehaviour:
   wallCrawl: {x: 12, y: 15}
   wallJump: {x: 18, y: 17}
   dashSpeed: 75
-  isSwinging: 0
 --- !u!95 &1455038766
 Animator:
   serializedVersion: 3
@@ -519,6 +477,21 @@ MonoBehaviour:
     m_RotationOrder: 4
   totalHorizontalRays: 8
   totalVerticalRays: 4
+--- !u!114 &1455038768
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1455038761}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 414bcb20f97ad2f45b1dba09844ffd7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  reachRadius: 5
+  speed: 20
+  canBash: 0
+  maxtime: 1
 --- !u!1 &1465055262
 GameObject:
   m_ObjectHideFlags: 0
@@ -558,7 +531,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1536419392}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1536419391
 GameObject:
@@ -587,11 +560,52 @@ Transform:
   m_Children:
   - {fileID: 1761771889}
   - {fileID: 1455038763}
-  - {fileID: 584704772}
   - {fileID: 1465055264}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1708687323
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4953835512628484, guid: f10871257bf86c64fb18e14bcb178483, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4953835512628484, guid: f10871257bf86c64fb18e14bcb178483, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4953835512628484, guid: f10871257bf86c64fb18e14bcb178483, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4953835512628484, guid: f10871257bf86c64fb18e14bcb178483, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4953835512628484, guid: f10871257bf86c64fb18e14bcb178483, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4953835512628484, guid: f10871257bf86c64fb18e14bcb178483, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4953835512628484, guid: f10871257bf86c64fb18e14bcb178483, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4953835512628484, guid: f10871257bf86c64fb18e14bcb178483, type: 2}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f10871257bf86c64fb18e14bcb178483, type: 2}
+  m_IsPrefabAsset: 0
 --- !u!1 &1761771888
 GameObject:
   m_ObjectHideFlags: 0
@@ -872,7 +886,7 @@ MonoBehaviour:
   - m_Script
   m_LockStageInInspector: 
   m_StreamingVersion: 20170927
-  m_Priority: 10
+  m_Priority: 15
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 1455038763}
   m_Lens:
@@ -906,6 +920,7 @@ GameObject:
   - component: {fileID: 2147019390}
   - component: {fileID: 2147019392}
   - component: {fileID: 2147019391}
+  - component: {fileID: 2147019393}
   m_Layer: 0
   m_Name: cm
   m_TagString: Untagged
@@ -943,10 +958,10 @@ MonoBehaviour:
   m_YDamping: 1
   m_ZDamping: 1
   m_ScreenX: 0.5107422
-  m_ScreenY: 0.49999958
+  m_ScreenY: 0.49999964
   m_CameraDistance: 10
-  m_DeadZoneWidth: 0.12539062
-  m_DeadZoneHeight: 0.23020855
+  m_DeadZoneWidth: 0.1500212
+  m_DeadZoneHeight: 0.470909
   m_DeadZoneDepth: 0
   m_UnlimitedSoftZone: 0
   m_SoftZoneWidth: 0.8
@@ -975,3 +990,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2147019393
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2147019389}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68bb026fafb42b14791938953eaace77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_NoiseProfile: {fileID: 11400000, guid: a3dacaec0287d7444b4bd276816e1666, type: 2}
+  m_AmplitudeGain: 0.5
+  m_FrequencyGain: 1
