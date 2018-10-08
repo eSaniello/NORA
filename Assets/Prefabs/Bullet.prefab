@@ -91,8 +91,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   groundLayer:
     serializedVersion: 2
-    m_Bits: 4294967295
-  destroyAfterSeconds: 3
+    m_Bits: 256
+  destroyAfterSeconds: 5
 --- !u!212 &212222603510389708
 SpriteRenderer:
   m_ObjectHideFlags: 1

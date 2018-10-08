@@ -10,7 +10,8 @@ public class Bullet : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.layer == 8) //8 = ground layer
-            gameObject.SetActive(false);
+            //gameObject.SetActive(false); for object pool
+            Destroy(gameObject);
     }
 
 
@@ -23,6 +24,7 @@ public class Bullet : MonoBehaviour
     IEnumerator DestroyAfterTime(float t)
     {
         yield return new WaitForSeconds(t);
-        gameObject.SetActive(false);
+        //gameObject.SetActive(false); //for object pool
+        Destroy(gameObject);
     }
 }

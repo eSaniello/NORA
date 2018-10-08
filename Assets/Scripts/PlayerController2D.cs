@@ -9,7 +9,8 @@ public class PlayerController2D : MonoBehaviour
     public bool canDoubleJump;
     public bool canWallJump;
     public bool canDash;
-	public float runSpeed = 8f;
+    public bool canBash;
+    public float runSpeed = 8f;
 	public float groundDamping = 20f; // how fast do we change direction? higher means faster
 	public float inAirDamping = 5f;
 	public float maxJumpHeight = 4f;
@@ -20,6 +21,11 @@ public class PlayerController2D : MonoBehaviour
     public Vector2 wallCrawl;
     public Vector2 wallJump;
     public float dashSpeed;
+    public float bashReachRadius = 5f;
+    public float bashSpeed = 20f;
+    public float maxTimeToWaitForBash = 1f;
+    public Transform arrow;
+    //public GameObject effect;
 
 
     [HideInInspector]
@@ -28,7 +34,8 @@ public class PlayerController2D : MonoBehaviour
 	private CharacterController2D _controller;
 	//private Animator _animator;
 	private RaycastHit2D _lastControllerColliderHit;
-	private Vector3 _velocity;
+    [HideInInspector]
+	public Vector3 _velocity; //Change back to private!!
     private float maxJumpVelocity;
     private float minJumpVelocity;
     private float gravity;
@@ -57,6 +64,8 @@ public class PlayerController2D : MonoBehaviour
         gravity = -(2 * maxJumpHeight) / Mathf.Pow(timeToJumpApex, 2);
         maxJumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
         minJumpVelocity = Mathf.Sqrt(2 * Mathf.Abs(gravity) * minJumpHeight);
+        
+        //arrow.gameObject.SetActive(false);
     }
 
 
