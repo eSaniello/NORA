@@ -26,8 +26,8 @@ public class PlayerController2D : MonoBehaviour
 	private float normalizedHorizontalSpeed = 0;
 
 	private CharacterController2D _controller;
-	//private Animator _animator;
-	private RaycastHit2D _lastControllerColliderHit;
+    private Animator _animator;
+    private RaycastHit2D _lastControllerColliderHit;
 	private Vector3 _velocity;
     private float maxJumpVelocity;
     private float minJumpVelocity;
@@ -43,8 +43,8 @@ public class PlayerController2D : MonoBehaviour
 
     void Awake()
 	{
-		//_animator = GetComponent<Animator>();
-		_controller = GetComponent<CharacterController2D>();
+        _animator = GetComponent<Animator>();
+        _controller = GetComponent<CharacterController2D>();
 
 		// listen to some events for illustration purposes
 		_controller.onControllerCollidedEvent += onControllerCollider;
@@ -104,9 +104,6 @@ public class PlayerController2D : MonoBehaviour
 
             if (!facingRight)
                 Flip();
-
-			//if( _controller.isGrounded )
-			//	_animator.Play( Animator.StringToHash( "Run" ) );
 		}
 		else if( input < 0 )
 		{
@@ -114,17 +111,16 @@ public class PlayerController2D : MonoBehaviour
 
             if (facingRight)
                 Flip();
-
-			//if( _controller.isGrounded )
-			//	_animator.Play( Animator.StringToHash( "Run" ) );
 		}
 		else
 		{
 			normalizedHorizontalSpeed = 0;
+        }
 
-			//if( _controller.isGrounded )
-			//	_animator.Play( Animator.StringToHash( "Idle" ) );
-		}
+        //playing the animations
+        if (_controller.isGrounded == true)
+            _animator.SetInteger("Run", input);
+
 
         //wall sliding
         if (!_controller.isGrounded && (_controller.collisionState.left || _controller.collisionState.right) && _velocity.y < 0)
@@ -162,7 +158,6 @@ public class PlayerController2D : MonoBehaviour
             if (_controller.isGrounded)
             {
                 _velocity.y = maxJumpVelocity;
-               //_animator.Play( Animator.StringToHash( "Jump" ) );
                 doubleJump = true;
             }
             else
