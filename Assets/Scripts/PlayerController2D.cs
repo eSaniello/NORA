@@ -159,6 +159,7 @@ public class PlayerController2D : MonoBehaviour
             {
                 _velocity.y = maxJumpVelocity;
                 doubleJump = true;
+                _animator.SetBool("Jump", true);
             }
             else
             {
@@ -166,7 +167,6 @@ public class PlayerController2D : MonoBehaviour
                 {
                     doubleJump = false;
                     _velocity.y = maxJumpVelocity;
-                    //_animator.Play(Animator.StringToHash("Jump"));
                 }
             }
 
@@ -184,6 +184,9 @@ public class PlayerController2D : MonoBehaviour
                 }
             }
 		}
+
+        if (!_controller.isGrounded && !isWallSliding && _velocity.y < 0)
+            _animator.SetBool("Jump", false);
 
         if (Input.GetKeyUp(KeyCode.Space))
         {
