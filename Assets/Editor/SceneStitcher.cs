@@ -163,7 +163,7 @@ public class SceneStitcher : Editor
         Handles.CubeHandleCap(0, trigger.transform.position + new Vector3(0f, trigger.GetComponent<BoxCollider2D>().size.y + 5, 0f), Quaternion.identity, 10, EventType.Repaint);
 
         GUIStyle style = new GUIStyle();
-        style.normal.textColor = Color.red;
+        style.normal.textColor = Color.white;
         Handles.Label(trigger.transform.position + new Vector3(-5, trigger.GetComponent<BoxCollider2D>().size.y + 6, 0f), trigger.gameObject.scene.name , style);
         Handles.color = Color.yellow;
         Handles.RectangleHandleCap(0, trigger.transform.position + new Vector3(0f, trigger.GetComponent<BoxCollider2D>().size.y + 5, 0f), Quaternion.identity, 5, EventType.Repaint);
