@@ -184,9 +184,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ScenesToLoad:
   - {fileID: 102900000, guid: a0e9a532625c59a4fb38265a6581c831, type: 3}
-  - {fileID: 102900000, guid: 177b2cbac1467b54a98c30a6633b288e, type: 3}
-  ScenesToUnload:
   - {fileID: 102900000, guid: 3d13d573cbc550a4899b7f9a8c2dc26b, type: 3}
+  ScenesToUnload:
+  - {fileID: 102900000, guid: 177b2cbac1467b54a98c30a6633b288e, type: 3}
 --- !u!61 &110736952
 BoxCollider2D:
   m_ObjectHideFlags: 0

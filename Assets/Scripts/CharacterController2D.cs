@@ -89,12 +89,12 @@ public class CharacterController2D : MonoBehaviour
 	/// <summary>
 	/// mask with all layers that the player should interact with
 	/// </summary>
-	public LayerMask platformMask = 0;
+	public LayerMask platformMask = 8; //8 = ground in project. CHANGE LATER!
 
 	/// <summary>
 	/// mask with all layers that trigger events should fire when intersected
 	/// </summary>
-	public LayerMask triggerMask = 0;
+	public LayerMask triggerMask = 9; //Triggers = 9 in project. CHANGE LATER!
 
 	/// <summary>
 	/// mask with all layers that should act as one-way platforms. Note that one-way platforms should always be EdgeCollider2Ds. This is because it does not support being

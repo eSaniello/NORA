@@ -9,17 +9,17 @@ public class PlayerController2D : MonoBehaviour
     public bool canDoubleJump;
     public bool canWallJump;
     public bool canDash;
-    public float runSpeed = 8f;
+    public float runSpeed = 12f;
 	public float groundDamping = 20f; // how fast do we change direction? higher means faster
 	public float inAirDamping = 5f;
 	public float maxJumpHeight = 4f;
     public float minJumpHeight = 2f;
-    public float timeToJumpApex = .4f;
-    public float wallSlidingSpeed;
+    public float timeToJumpApex = .45f;
+    public float wallSlidingSpeed = .75f;
     public float wallStickTime = .25f;
-    public Vector2 wallCrawl;
-    public Vector2 wallJump;
-    public float dashSpeed;
+    public Vector2 wallCrawl = new Vector2(12, 15);
+    public Vector2 wallJump = new Vector2(18, 17);
+    public float dashSpeed = 75;
 
 
     [HideInInspector]
