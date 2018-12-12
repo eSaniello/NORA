@@ -121,6 +121,9 @@ public class PlayerController2D : MonoBehaviour
         if (_controller.isGrounded == true)
             _animator.SetInteger("Run", input);
 
+        if (Input.GetKeyDown(KeyCode.X))
+            _animator.SetTrigger("Melee_attack");
+
 
         //wall sliding
         if (!_controller.isGrounded && (_controller.collisionState.left || _controller.collisionState.right) && _velocity.y < 0)
