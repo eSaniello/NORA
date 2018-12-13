@@ -29,6 +29,7 @@ public class PlayerController2D : MonoBehaviour
     public WeaponSwitcher weaponSwitcher;
     public MeleeWeapon basicSword;
     public MeleeWeapon powerSword;
+    public MeleeWeapon ultraPowerSword;
 
     [HideInInspector]
 	private float normalizedHorizontalSpeed = 0;
@@ -246,8 +247,10 @@ public class PlayerController2D : MonoBehaviour
             startTimeBtwMeleeAttack = basicSword.attackRate;
         else if (weaponSwitcher.selectedWeapon == 1)
             startTimeBtwMeleeAttack = powerSword.attackRate;
+        else if (weaponSwitcher.selectedWeapon == 2)
+            startTimeBtwMeleeAttack = ultraPowerSword.attackRate;
 
-        if(timeBtwMeleeAttack <= 0)
+        if (timeBtwMeleeAttack <= 0)
         {
             if (Input.GetKey (KeyCode.X))
             {
@@ -255,6 +258,8 @@ public class PlayerController2D : MonoBehaviour
                     _animator.SetTrigger("Basic_sword_attack");
                 else if (weaponSwitcher.selectedWeapon == 1)
                     _animator.SetTrigger("Power_sword_attack");
+                else if (weaponSwitcher.selectedWeapon == 2)
+                    _animator.SetTrigger("Ultra_power_sword_attack");
 
                 Collider2D[] enemiesToDamage = Physics2D.OverlapBoxAll(meleeAttackRangePos.position, new Vector2(meleeAttackRangeX, meleeAttackRangeY), 0, enemieMask);
                 for (int i = 0; i < enemiesToDamage.Length; i++)
@@ -264,6 +269,8 @@ public class PlayerController2D : MonoBehaviour
                         enemiesToDamage[i].GetComponent<Enemy>().TakeDamage(basicSword.damage);
                     else if (weaponSwitcher.selectedWeapon == 1)
                         enemiesToDamage[i].GetComponent<Enemy>().TakeDamage(powerSword.damage);
+                    else if (weaponSwitcher.selectedWeapon == 2)
+                        enemiesToDamage[i].GetComponent<Enemy>().TakeDamage(ultraPowerSword.damage);
                 }
 
 
