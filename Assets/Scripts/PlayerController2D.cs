@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using Prime31;
 
 
@@ -20,7 +21,14 @@ public class PlayerController2D : MonoBehaviour
     public Vector2 wallCrawl = new Vector2(12, 15);
     public Vector2 wallJump = new Vector2(18, 17);
     public float dashSpeed = 75;
-
+    public float startTimeBtwMeleeAttack;
+    public Transform meleeAttackRangePos;
+    public float meleeAttackRangeX;
+    public float meleeAttackRangeY;
+    public LayerMask enemieMask;
+    public WeaponSwitcher weaponSwitcher;
+    public MeleeWeapon basicSword;
+    public MeleeWeapon powerSword;
 
     [HideInInspector]
 	private float normalizedHorizontalSpeed = 0;
@@ -39,6 +47,8 @@ public class PlayerController2D : MonoBehaviour
     private int input;
     private bool isDashing;
     private bool dash;
+    private float timeBtwMeleeAttack;
+    
 
 
     void Awake()
@@ -57,8 +67,6 @@ public class PlayerController2D : MonoBehaviour
         gravity = -(2 * maxJumpHeight) / Mathf.Pow(timeToJumpApex, 2);
         maxJumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
         minJumpVelocity = Mathf.Sqrt(2 * Mathf.Abs(gravity) * minJumpHeight);
-        
-        //arrow.gameObject.SetActive(false);
     }
 
 
@@ -92,6 +100,7 @@ public class PlayerController2D : MonoBehaviour
 	// the Update loop contains a very simple example of moving the character around and controlling the animation
 	void Update()
 	{
+
         input = (int)Input.GetAxisRaw("Horizontal");
         int wallDirX = (_controller.collisionState.left) ? -1 : 1;
 
@@ -120,9 +129,6 @@ public class PlayerController2D : MonoBehaviour
         //playing the animations
         if (_controller.isGrounded == true)
             _animator.SetInteger("Run", input);
-
-        if (Input.GetKeyDown(KeyCode.X))
-            _animator.SetTrigger("Melee_attack");
 
 
         //wall sliding
@@ -162,7 +168,7 @@ public class PlayerController2D : MonoBehaviour
             {
                 _velocity.y = maxJumpVelocity;
                 doubleJump = true;
-                _animator.SetBool("Jump", true);
+                // _animator.SetBool("Jump", true);
             }
             else
             {
@@ -188,8 +194,13 @@ public class PlayerController2D : MonoBehaviour
             }
 		}
 
+        if (!_controller.isGrounded && _velocity.y > 0)
+            _animator.SetBool("Jump", true);
+
         if (!_controller.isGrounded && !isWallSliding && _velocity.y < 0)
             _animator.SetBool("Jump", false);
+
+        _animator.SetBool("Grounded", _controller.isGrounded);
 
         if (Input.GetKeyUp(KeyCode.Space))
         {
@@ -229,7 +240,40 @@ public class PlayerController2D : MonoBehaviour
             dash = true;
             isDashing = false;
         }
-        
+
+        //Melee code
+        if (weaponSwitcher.selectedWeapon == 0)
+            startTimeBtwMeleeAttack = basicSword.attackRate;
+        else if (weaponSwitcher.selectedWeapon == 1)
+            startTimeBtwMeleeAttack = powerSword.attackRate;
+
+        if(timeBtwMeleeAttack <= 0)
+        {
+            if (Input.GetKey (KeyCode.X))
+            {
+                if (weaponSwitcher.selectedWeapon == 0)
+                    _animator.SetTrigger("Basic_sword_attack");
+                else if (weaponSwitcher.selectedWeapon == 1)
+                    _animator.SetTrigger("Power_sword_attack");
+
+                Collider2D[] enemiesToDamage = Physics2D.OverlapBoxAll(meleeAttackRangePos.position, new Vector2(meleeAttackRangeX, meleeAttackRangeY), 0, enemieMask);
+                for (int i = 0; i < enemiesToDamage.Length; i++)
+                {
+                    //Deal damage to enemy
+                    if (weaponSwitcher.selectedWeapon == 0)
+                        enemiesToDamage[i].GetComponent<Enemy>().TakeDamage(basicSword.damage);
+                    else if (weaponSwitcher.selectedWeapon == 1)
+                        enemiesToDamage[i].GetComponent<Enemy>().TakeDamage(powerSword.damage);
+                }
+
+
+                timeBtwMeleeAttack = startTimeBtwMeleeAttack;
+            }
+        }
+        else
+        {
+            timeBtwMeleeAttack -= Time.deltaTime;
+        }
 
         //apply horizontal speed smoothing it.dont really do this with Lerp.Use SmoothDamp or something that provides more control
         var smoothedMovementFactor = _controller.isGrounded ? groundDamping : inAirDamping; // how fast do we change direction?
@@ -258,5 +302,12 @@ public class PlayerController2D : MonoBehaviour
         Vector3 theScale = transform.localScale;
         theScale.x *= -1;
         transform.localScale = theScale;
+    }
+
+    //editor scripting
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(meleeAttackRangePos.position, new Vector3(meleeAttackRangeX, meleeAttackRangeY, 1));
     }
 }

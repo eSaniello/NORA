@@ -13,7 +13,6 @@ public class AbilityUnlocker : MonoBehaviour
     {
         if(collision.tag == "Player")
         {
-            Debug.Log("AYO");
             if (unlockDoubleJump)
                 collision.GetComponent<PlayerController2D>().canDoubleJump = true;
             else if (unlockWallJump)
