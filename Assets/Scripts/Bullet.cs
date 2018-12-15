@@ -4,27 +4,27 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    public LayerMask groundLayer;
-    public float destroyAfterSeconds;
+    public float speed;
+    public float lifeTime = 10;
+    public float detectionRayDistance;
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private Rigidbody2D rb;
+    private PlayerController2D controller;
+
+    private void Start()
     {
-        if (collision.gameObject.layer == 8) //8 = ground layer
-            //gameObject.SetActive(false); for object pool
-            Destroy(gameObject);
+        controller = FindObjectOfType<PlayerController2D>();
+        rb = GetComponent<Rigidbody2D>();
+        rb.velocity = transform.right * speed * controller.transform.localScale.x * Time.deltaTime;
     }
-
 
     private void Update()
     {
-        StartCoroutine(DestroyAfterTime(destroyAfterSeconds));
+        Destroy(gameObject, lifeTime);
     }
 
-
-    IEnumerator DestroyAfterTime(float t)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        yield return new WaitForSeconds(t);
-        //gameObject.SetActive(false); //for object pool
         Destroy(gameObject);
     }
 }

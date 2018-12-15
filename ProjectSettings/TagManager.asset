@@ -8,6 +8,7 @@ TagManager:
   - PlayerOne
   - BulletPool
   - Bullet
+  - Enemy
   layers:
   - Default
   - TransparentFX

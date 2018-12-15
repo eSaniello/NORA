@@ -21,7 +21,6 @@ public class PlayerController2D : MonoBehaviour
     public Vector2 wallCrawl = new Vector2(12, 15);
     public Vector2 wallJump = new Vector2(18, 17);
     public float dashSpeed = 75;
-    public float startTimeBtwMeleeAttack;
     public Transform meleeAttackRangePos;
     public float meleeAttackRangeX;
     public float meleeAttackRangeY;
@@ -48,6 +47,7 @@ public class PlayerController2D : MonoBehaviour
     private int input;
     private bool isDashing;
     private bool dash;
+    private float startTimeBtwMeleeAttack;
     private float timeBtwMeleeAttack;
     
 
@@ -243,43 +243,50 @@ public class PlayerController2D : MonoBehaviour
         }
 
         //Melee code
-        if (weaponSwitcher.selectedWeapon == 0)
-            startTimeBtwMeleeAttack = basicSword.attackRate;
-        else if (weaponSwitcher.selectedWeapon == 1)
-            startTimeBtwMeleeAttack = powerSword.attackRate;
-        else if (weaponSwitcher.selectedWeapon == 2)
-            startTimeBtwMeleeAttack = ultraPowerSword.attackRate;
-
-        if (timeBtwMeleeAttack <= 0)
+        if (basicSword.transform.IsChildOf(transform.Find("Melee Weapons Holder"))
+            || powerSword.transform.IsChildOf(transform.Find("Melee Weapons Holder"))
+            || ultraPowerSword.transform.IsChildOf(transform.Find("Melee Weapons Holder")))
         {
-            if (Input.GetKey (KeyCode.X))
+
+
+            if (weaponSwitcher.selectedWeapon == 0)
+                startTimeBtwMeleeAttack = basicSword.attackRate;
+            else if (weaponSwitcher.selectedWeapon == 1)
+                startTimeBtwMeleeAttack = powerSword.attackRate;
+            else if (weaponSwitcher.selectedWeapon == 2)
+                startTimeBtwMeleeAttack = ultraPowerSword.attackRate;
+
+            if (timeBtwMeleeAttack <= 0)
             {
-                if (weaponSwitcher.selectedWeapon == 0)
-                    _animator.SetTrigger("Basic_sword_attack");
-                else if (weaponSwitcher.selectedWeapon == 1)
-                    _animator.SetTrigger("Power_sword_attack");
-                else if (weaponSwitcher.selectedWeapon == 2)
-                    _animator.SetTrigger("Ultra_power_sword_attack");
-
-                Collider2D[] enemiesToDamage = Physics2D.OverlapBoxAll(meleeAttackRangePos.position, new Vector2(meleeAttackRangeX, meleeAttackRangeY), 0, enemieMask);
-                for (int i = 0; i < enemiesToDamage.Length; i++)
+                if (Input.GetKey(KeyCode.X))
                 {
-                    //Deal damage to enemy
                     if (weaponSwitcher.selectedWeapon == 0)
-                        enemiesToDamage[i].GetComponent<Enemy>().TakeDamage(basicSword.damage);
+                        _animator.SetTrigger("Basic_sword_attack");
                     else if (weaponSwitcher.selectedWeapon == 1)
-                        enemiesToDamage[i].GetComponent<Enemy>().TakeDamage(powerSword.damage);
+                        _animator.SetTrigger("Power_sword_attack");
                     else if (weaponSwitcher.selectedWeapon == 2)
-                        enemiesToDamage[i].GetComponent<Enemy>().TakeDamage(ultraPowerSword.damage);
+                        _animator.SetTrigger("Ultra_power_sword_attack");
+
+                    Collider2D[] enemiesToDamage = Physics2D.OverlapBoxAll(meleeAttackRangePos.position, new Vector2(meleeAttackRangeX, meleeAttackRangeY), 0, enemieMask);
+                    for (int i = 0; i < enemiesToDamage.Length; i++)
+                    {
+                        //Deal damage to enemy
+                        if (weaponSwitcher.selectedWeapon == 0)
+                            enemiesToDamage[i].GetComponent<Enemy>().TakeDamage(basicSword.damage);
+                        else if (weaponSwitcher.selectedWeapon == 1)
+                            enemiesToDamage[i].GetComponent<Enemy>().TakeDamage(powerSword.damage);
+                        else if (weaponSwitcher.selectedWeapon == 2)
+                            enemiesToDamage[i].GetComponent<Enemy>().TakeDamage(ultraPowerSword.damage);
+                    }
+
+
+                    timeBtwMeleeAttack = startTimeBtwMeleeAttack;
                 }
-
-
-                timeBtwMeleeAttack = startTimeBtwMeleeAttack;
             }
-        }
-        else
-        {
-            timeBtwMeleeAttack -= Time.deltaTime;
+            else
+            {
+                timeBtwMeleeAttack -= Time.deltaTime;
+            }
         }
 
         //apply horizontal speed smoothing it.dont really do this with Lerp.Use SmoothDamp or something that provides more control
