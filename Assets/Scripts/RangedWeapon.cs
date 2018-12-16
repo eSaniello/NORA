@@ -7,6 +7,7 @@ public class RangedWeapon : MonoBehaviour
     public Transform firepoint;
     public Bullet bulletPrefab;
     public float fireRate;
+    public float damage;
 
     private float timeBtwFire;
 
@@ -16,7 +17,8 @@ public class RangedWeapon : MonoBehaviour
         {
             if (Input.GetKey(KeyCode.C))
             {
-                Instantiate(bulletPrefab, firepoint.position, Quaternion.identity);
+                Bullet bullet = Instantiate(bulletPrefab, firepoint.position, Quaternion.identity);
+                bullet.damage = damage;
 
                 timeBtwFire = fireRate;
             }

@@ -8,6 +8,8 @@ public class WeaponPickup : MonoBehaviour
     public bool basicSword = false;
     public bool powerSword = false;
     public bool ultraPowerSword = false;
+    public bool asaultRifle = false;
+    public bool smg = false;
 
     private Transform weaponToPickup;
 
@@ -32,6 +34,18 @@ public class WeaponPickup : MonoBehaviour
             else if (ultraPowerSword)
             {
                 weaponToPickup = weaponsToUnlockHolder.Find("Ultra Power Sword");
+
+                PickUpWeapon(weaponsToUnlockHolder, weaponToPickup, collision);
+            }
+            else if (asaultRifle)
+            {
+                weaponToPickup = weaponsToUnlockHolder.Find("Asault Rifle");
+
+                PickUpWeapon(weaponsToUnlockHolder, weaponToPickup, collision);
+            }
+            else if (smg)
+            {
+                weaponToPickup = weaponsToUnlockHolder.Find("SMG");
 
                 PickUpWeapon(weaponsToUnlockHolder, weaponToPickup, collision);
             }

@@ -9,6 +9,7 @@ TagManager:
   - BulletPool
   - Bullet
   - Enemy
+  - Triggers
   layers:
   - Default
   - TransparentFX

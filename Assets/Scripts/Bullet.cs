@@ -6,10 +6,11 @@ public class Bullet : MonoBehaviour
 {
     public float speed;
     public float lifeTime = 10;
-    public float detectionRayDistance;
 
     private Rigidbody2D rb;
     private PlayerController2D controller;
+    [HideInInspector]
+    public float damage;
 
     private void Start()
     {
@@ -25,6 +26,18 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Destroy(gameObject);
+        if(collision.CompareTag("Triggers"))
+        {
+            Debug.Log("ew a trigger");
+        }
+        else if(collision.CompareTag("Enemy"))
+        {
+            collision.GetComponent<Enemy>().TakeDamage(damage);
+            Destroy(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 }
