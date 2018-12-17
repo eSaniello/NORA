@@ -571,9 +571,17 @@ PrefabInstance:
       propertyPath: damage
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1787459668, guid: 93c6c05b06862a9468e50e839c864fe1, type: 3}
+      propertyPath: bulletPool
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 2082360197, guid: 93c6c05b06862a9468e50e839c864fe1, type: 3}
       propertyPath: damage
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2082360197, guid: 93c6c05b06862a9468e50e839c864fe1, type: 3}
+      propertyPath: bulletPool
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 93c6c05b06862a9468e50e839c864fe1, type: 3}

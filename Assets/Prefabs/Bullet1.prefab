@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 114256918308046870}
   - component: {fileID: 58971607633045664}
   m_Layer: 0
-  m_Name: Bullet 1
+  m_Name: Bullet1
   m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -116,7 +116,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1250
-  lifeTime: 10
+  lifeTime: 5
+  damage: 0
 --- !u!58 &58971607633045664
 CircleCollider2D:
   m_ObjectHideFlags: 0
