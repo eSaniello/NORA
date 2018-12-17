@@ -6,24 +6,21 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/_Scenes/Player.unity
+    path: Assets/_Scenes/Player/Player.unity
     guid: 3d1689331fd9627409fc002bba0f3c60
   - enabled: 1
-    path: Assets/_Scenes/main.unity
+    path: Assets/_Scenes/Dash.unity
+    guid: 3d13d573cbc550a4899b7f9a8c2dc26b
+  - enabled: 1
+    path: Assets/_Scenes/DoubleJump.unity
+    guid: a0e9a532625c59a4fb38265a6581c831
+  - enabled: 1
+    path: Assets/_Scenes/End.unity
+    guid: a6ce517e75bda3f4eb32802b251e81fb
+  - enabled: 1
+    path: Assets/_Scenes/Start.unity
     guid: ef0036215aa46374888098f8b1d365a0
   - enabled: 1
-    path: Assets/_Scenes/TestSceneFour.unity
-    guid: 01bb8f52244017e4fb0e14d0055cbb10
-  - enabled: 1
-    path: Assets/_Scenes/TestSceneThree.unity
-    guid: 2e45046a7196e724e85a7a54f511f8d0
-  - enabled: 1
-    path: Assets/_Scenes/TestSceneTwo.unity
-    guid: f9e1aa8ab38d9ea4894ebf500afb5b1d
-  - enabled: 1
-    path: Assets/_Scenes/TestSceneFive.unity
-    guid: 5c27f06c004f51b42b12e0b7349660c4
-  - enabled: 1
-    path: Assets/_Scenes/TestSceneOne.unity
-    guid: 623ea731622393844825ea13998cbd72
+    path: Assets/_Scenes/Walljump.unity
+    guid: 177b2cbac1467b54a98c30a6633b288e
   m_configObjects: {}

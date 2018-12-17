@@ -6,7 +6,10 @@ TagManager:
   tags:
   - Ground
   - PlayerOne
-  - PlayerTwo
+  - BulletPool
+  - Bullet
+  - Enemy
+  - Triggers
   layers:
   - Default
   - TransparentFX
@@ -18,7 +21,7 @@ TagManager:
   - 
   - Ground
   - Triggers
-  - 
+  - Enemy
   - 
   - 
   - 

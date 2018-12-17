@@ -28,6 +28,7 @@ public class CharacterController2D : MonoBehaviour
 		public bool wasGroundedLastFrame;
 		public bool movingDownSlope;
 		public float slopeAngle;
+        public int faceDir;
 
 
 		public bool hasCollision()
@@ -88,12 +89,12 @@ public class CharacterController2D : MonoBehaviour
 	/// <summary>
 	/// mask with all layers that the player should interact with
 	/// </summary>
-	public LayerMask platformMask = 0;
+	public LayerMask platformMask; //8 = ground in project. CHANGE LATER!
 
 	/// <summary>
 	/// mask with all layers that trigger events should fire when intersected
 	/// </summary>
-	public LayerMask triggerMask = 0;
+	public LayerMask triggerMask; //Triggers = 9 in project. CHANGE LATER!
 
 	/// <summary>
 	/// mask with all layers that should act as one-way platforms. Note that one-way platforms should always be EdgeCollider2Ds. This is because it does not support being
@@ -197,12 +198,17 @@ public class CharacterController2D : MonoBehaviour
 		{
 			// see if our triggerMask contains this layer and if not ignore it
 			if( ( triggerMask.value & 1 << i ) == 0 )
-				Physics2D.IgnoreLayerCollision( gameObject.layer, i );
+				Physics2D.IgnoreLayerCollision( gameObject.layer, i , false);
 		}
 	}
 
+        private void Start()
+        {
+            collisionState.faceDir = 1;
+        }
 
-	public void OnTriggerEnter2D( Collider2D col )
+
+        public void OnTriggerEnter2D( Collider2D col )
 	{
 		if( onTriggerEnterEvent != null )
 			onTriggerEnterEvent( col );
@@ -252,13 +258,19 @@ public class CharacterController2D : MonoBehaviour
 		primeRaycastOrigins();
 
 
+            if(deltaMovement.x != 0)
+            {
+                collisionState.faceDir = (int)Mathf.Sign(deltaMovement.x);
+            }
+
+
 		// first, we check for a slope below us before moving
 		// only check slopes if we are going down and grounded
 		if( deltaMovement.y < 0f && collisionState.wasGroundedLastFrame )
 			handleVerticalSlope( ref deltaMovement );
 
 		// now we check movement in the horizontal dir
-		if( deltaMovement.x != 0f )
+		//if( deltaMovement.x != 0f )
 			moveHorizontally( ref deltaMovement );
 
 		// next, check movement in the vertical dir
@@ -351,10 +363,16 @@ public class CharacterController2D : MonoBehaviour
 	/// </summary>
 	void moveHorizontally( ref Vector3 deltaMovement )
 	{
-		var isGoingRight = deltaMovement.x > 0;
+        var directionX = collisionState.faceDir;
 		var rayDistance = Mathf.Abs( deltaMovement.x ) + _skinWidth;
-		var rayDirection = isGoingRight ? Vector2.right : -Vector2.right;
-		var initialRayOrigin = isGoingRight ? _raycastOrigins.bottomRight : _raycastOrigins.bottomLeft;
+
+            if(Mathf.Abs(deltaMovement.x) < _skinWidth)
+            {
+                rayDistance = 2 * _skinWidth;
+            }
+
+		var rayDirection = (directionX==1) ? Vector2.right : -Vector2.right;
+		var initialRayOrigin = (directionX==1) ? _raycastOrigins.bottomRight : _raycastOrigins.bottomLeft;
 
 		for( var i = 0; i < totalHorizontalRays; i++ )
 		{
@@ -383,12 +401,12 @@ public class CharacterController2D : MonoBehaviour
 				rayDistance = Mathf.Abs( deltaMovement.x );
 
 				// remember to remove the skinWidth from our deltaMovement
-				if( isGoingRight )
+				if( directionX == 1 )
 				{
 					deltaMovement.x -= _skinWidth;
 					collisionState.right = true;
 				}
-				else
+				else if(directionX == -1)
 				{
 					deltaMovement.x += _skinWidth;
 					collisionState.left = true;
