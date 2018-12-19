@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Prime31;
+using UnityEngine.UI;
 
 
 public class PlayerController2D : MonoBehaviour
